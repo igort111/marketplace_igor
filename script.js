@@ -22,3 +22,62 @@ xhr.onload = function () {
   });
 }
 xhr.send();
+
+function addProductToCart(id){
+  xhr.open('GET', `${url}/products/${id}`);
+  xhr.responseType = "json";
+  xhr.onload = function() {
+
+  }
+}
+let cartproducts = document.getElementById("cart-products");
+
+let cart = [];
+if (localStorage.getItem('cart')) {
+  cart = JSON.parse(localStorage.getItem('cart'));
+  DrawCartProducts();
+
+}
+
+function addProductToCart(id){
+  let product = productsArray.find(function(p){
+    return p.id == id;
+  })
+  cart.push(product);
+
+  DrawCartProducts();
+
+  localStorage.setItem('cart', JSON.stringify(cart));
+
+  document.getElementById('cart-button').classList.add('active');
+  setTimeout(function(){
+    document.getElementById('cart-button').classList.remove('active');
+  },500);
+}
+
+function DrawCartProducts(){
+  if (cart.length === 0) return cartproducts.innerHTML = "cart is empty";
+  cartproducts.innerHTML = null;
+  let sum = 0;
+  cart.forEach(function(p){
+    cartproducts.innerHTML +=`
+    <p><img src ="${p.photo}"> ${p.name} | ${p.price}BYN</p>
+    <hr>
+    `;
+    sum += p.price;
+  })
+  cartproducts.innerHTML +=`
+  <p>Total price: ${sum}BYN</p>
+  <button onclick ="buyAll()">Buy All</button>
+  `;
+}
+
+function buyAll(){
+  cart = [];
+  cartproducts.innerHTML = 'yes';
+  localStorage.setItem('cart', '[]');
+
+}
+ function openCart(){
+  cartproducts.classList.toggle('hide');
+ }

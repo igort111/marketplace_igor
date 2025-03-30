@@ -49,6 +49,7 @@ button {
     border-radius: 10px;
     border: none;
     min-width: 50%;
+    
 }
 
 /* -----Cart----- */
@@ -64,6 +65,7 @@ button {
     justify-content: center;
     align-items: center;
     transition: all .5s;
+    
 }
 
 #cart {
