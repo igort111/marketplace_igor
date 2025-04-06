@@ -16,6 +16,7 @@ xhr.onload = function () {
         <img class='product-photo' src='${p.photo}' alt='${p.name}'>
         <p class='product-price'><b>Price: </b>${p.price}BYN</p>
         <p class='product-description'><b>Description: </b>${p.desc}</p>
+        <a href="userProfile.html?id=${p.author_id}">Seller profile</a>
         <button onclick ="addProductToCart(${p.id})">Buy</button>
         `;
     productsgrid.append(pElem);
